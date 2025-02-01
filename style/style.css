@@ -150,7 +150,6 @@ body {
 }
 
 .select-box {
-  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -161,6 +160,12 @@ body {
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
   padding: 20px 25px 25px;
   border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.select-box.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
 }
 .select-box h1 {
   font-size: 1.55rem;
@@ -195,11 +200,19 @@ body {
 }
 
 .play-board {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.9);
+  transition: all 0.3s ease;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.play-board.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
 }
 .play-board .details {
   background-color: #FFF;
@@ -259,6 +272,7 @@ body {
 }
 
 .result-box {
+  display: none;
   max-width: 350px;
   width: 100%;
   position: absolute;
@@ -269,6 +283,7 @@ body {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
+  transition: all 0.3s ease;
 }
 .result-box .won-text {
   text-align: center;
