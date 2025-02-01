@@ -1,5 +1,176 @@
 @use "./reset";
 
+@mixin position {
+  position : absolute;
+  top      : 50%;
+  left     : 50%;
+  transform: translate(-50%, -50%);
+}
+
 * {
   font-family: "Noto Sans", serif;
+}
+
+body {
+  background-color: #7DA0CA;
+}
+
+.select-box {
+  display: none;
+
+  @include position;
+  max-width       : 380px;
+  width           : 100%;
+  background-color: #FFF;
+  box-shadow      : 0 0 5px 1px #00000016;
+  padding         : 20px 25px 25px;
+  border-radius   : 8px;
+
+  h1 {
+    font-size     : 1.55rem;
+    font-weight   : 600;
+    padding-bottom: 10px;
+    border-bottom : 1px solid #ccc;
+  }
+
+  .title {
+    font-size  : 1.25rem;
+    font-weight: 500;
+    margin     : 20px 0;
+  }
+
+  .options {
+    display: flex;
+    width  : 100%;
+    gap    : 15px;
+
+    button {
+      cursor          : pointer;
+      width           : 100%;
+      font-size       : 1.25rem;
+      padding         : 8px 0;
+      border          : none;
+      outline         : none;
+      background-color: #7DA0CA;
+      color           : #FFF;
+      border-radius   : 8px;
+      transition      : all .15s ease-in-out;
+
+      &:hover {
+        transform: scale(.95);
+      }
+    }
+  }
+}
+
+.play-board {
+  display: none;
+
+  @include position;
+
+  .details {
+    background-color: #FFF;
+    padding         : 7px;
+    box-shadow      : 0 0 5px 1px #00000016;
+    border-radius   : 5px;
+
+    .players {
+      position       : relative;
+      display        : flex;
+      gap            : 5px;
+      width          : 100%;
+      justify-content: space-between;
+
+      .slider {
+        position        : absolute;
+        top             : 0;
+        left            : 0;
+        height          : 100%;
+        width           : 50%;
+        background-color: #7DA0CA;
+        border-radius   : 5px;
+        z-index         : 2;
+      }
+
+      span {
+        position     : relative;
+        width        : 100%;
+        border-radius: 5px;
+        padding      : 7px 0;
+        cursor       : default;
+        text-align   : center;
+        color        : #7DA0CA;
+        font-size    : 1.25rem;
+        font-weight  : 500;
+        z-index      : 5;
+
+        &:first-child {
+          color: #FFF;
+        }
+      }
+    }
+  }
+
+  .play-area {
+    margin-top: 20px;
+
+    section {
+      display: flex;
+
+      span {
+        display         : block;
+        height          : 80px;
+        width           : 80px;
+        background-color: #FFF;
+        margin          : 2px;
+        border-radius   : 5px;
+        font-size       : 40px;
+        text-align      : center;
+        line-height     : 80px;
+        color           : #7DA0CA;
+      }
+    }
+  }
+}
+
+.result-box {
+  max-width: 350px;
+  width    : 100%;
+  @include position;
+  background-color: #FFF;
+  padding         : 20px;
+  border-radius   : 5px;
+  box-shadow      : 0 0 5px 1px #00000016;
+
+  .won-text {
+    text-align : center;
+    font-size  : 1.5rem;
+    font-weight: 500;
+
+    span {
+      color      : #7DA0CA;
+      font-weight: 600;
+    }
+  }
+
+  .btn {
+    display        : flex;
+    margin-top     : 20px;
+    justify-content: center;
+
+    button {
+      cursor          : pointer;
+      color           : #FFF;
+      background-color: #7DA0CA;
+      border-radius   : 5px;
+      font-size       : 1.25rem;
+      border          : none;
+      padding         : 8px 20px;
+      transition      : all .15s ease-in-out;
+
+      &:hover {
+        transform: scale(.95);
+      }
+    }
+  }
 }

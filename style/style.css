@@ -143,4 +143,157 @@ img {
 
 * {
   font-family: "Noto Sans", serif;
+}
+
+body {
+  background-color: #7DA0CA;
+}
+
+.select-box {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 380px;
+  width: 100%;
+  background-color: #FFF;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
+  padding: 20px 25px 25px;
+  border-radius: 8px;
+}
+.select-box h1 {
+  font-size: 1.55rem;
+  font-weight: 600;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.select-box .title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 20px 0;
+}
+.select-box .options {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+}
+.select-box .options button {
+  cursor: pointer;
+  width: 100%;
+  font-size: 1.25rem;
+  padding: 8px 0;
+  border: none;
+  outline: none;
+  background-color: #7DA0CA;
+  color: #FFF;
+  border-radius: 8px;
+  transition: all 0.15s ease-in-out;
+}
+.select-box .options button:hover {
+  transform: scale(0.95);
+}
+
+.play-board {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.play-board .details {
+  background-color: #FFF;
+  padding: 7px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
+  border-radius: 5px;
+}
+.play-board .details .players {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  width: 100%;
+  justify-content: space-between;
+}
+.play-board .details .players .slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50%;
+  background-color: #7DA0CA;
+  border-radius: 5px;
+  z-index: 2;
+}
+.play-board .details .players span {
+  position: relative;
+  width: 100%;
+  border-radius: 5px;
+  padding: 7px 0;
+  cursor: default;
+  text-align: center;
+  color: #7DA0CA;
+  font-size: 1.25rem;
+  font-weight: 500;
+  z-index: 5;
+}
+.play-board .details .players span:first-child {
+  color: #FFF;
+}
+.play-board .play-area {
+  margin-top: 20px;
+}
+.play-board .play-area section {
+  display: flex;
+}
+.play-board .play-area section span {
+  display: block;
+  height: 80px;
+  width: 80px;
+  background-color: #FFF;
+  margin: 2px;
+  border-radius: 5px;
+  font-size: 40px;
+  text-align: center;
+  line-height: 80px;
+  color: #7DA0CA;
+}
+
+.result-box {
+  max-width: 350px;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FFF;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
+}
+.result-box .won-text {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.result-box .won-text span {
+  color: #7DA0CA;
+  font-weight: 600;
+}
+.result-box .btn {
+  display: flex;
+  margin-top: 20px;
+  justify-content: center;
+}
+.result-box .btn button {
+  cursor: pointer;
+  color: #FFF;
+  background-color: #7DA0CA;
+  border-radius: 5px;
+  font-size: 1.25rem;
+  border: none;
+  padding: 8px 20px;
+  transition: all 0.15s ease-in-out;
+}
+.result-box .btn button:hover {
+  transform: scale(0.95);
 }/*# sourceMappingURL=style.css.map */
