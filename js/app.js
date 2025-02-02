@@ -1,8 +1,12 @@
 const selectBox = document.querySelector(".select-box");
 const selectXBtn = selectBox.querySelector(".playerX");
 const selectOBtn = selectBox.querySelector(".playerO");
-const playBoard = document.querySelector(".play-board");
 
+const difficultyBox = document.querySelector(".difficulty-box");
+const easyBtn = document.querySelector(".easy");
+const hardBtn = document.querySelector(".hard");
+
+const playBoard = document.querySelector(".play-board");
 const players = document.querySelector(".players");
 const allBox = document.querySelectorAll(".play-area section span");
 
@@ -16,6 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let playerOIcon = "fa-solid fa-o";
   // 追蹤是否為玩家回合
   let isPlayerTurn = true;
+  // 難易度
+  let isHard = false;
 
   // Player 點擊判斷
   const clickedBox = (elem) => {
@@ -145,19 +151,34 @@ document.addEventListener("DOMContentLoaded", () => {
   // 對每個遊戲格子 新增一個 點擊事件
   allBox.forEach((box) => box.addEventListener("click", () => clickedBox(box)));
 
-  // 玩家選擇
+  // 玩家選擇 X 或 O
   selectXBtn.addEventListener("click", () => {
     selectBox.classList.add("hidden");
     setTimeout(() => {
-      playBoard.classList.add("show");
+      difficultyBox.classList.add("show"); // 顯示難度選擇框
     }, 200);
   });
 
   selectOBtn.addEventListener("click", () => {
     selectBox.classList.add("hidden");
     setTimeout(() => {
-      playBoard.classList.add("show");
+      difficultyBox.classList.add("show"); // 顯示難度選擇框
     }, 200);
     players.classList.add("active", "player");
+  });
+
+  // 隨後玩家選擇難度，按下難度按鈕
+  easyBtn.addEventListener("click", () => {
+    difficultyBox.classList.remove("show"); // 隱藏難度框
+    setTimeout(() => {
+      playBoard.classList.add("show"); // 顯示遊戲板
+    }, 200);
+  });
+
+  hardBtn.addEventListener("click", () => {
+    difficultyBox.classList.remove("show"); // 隱藏難度框
+    setTimeout(() => {
+      playBoard.classList.add("show"); // 顯示遊戲板
+    }, 200);
   });
 });
