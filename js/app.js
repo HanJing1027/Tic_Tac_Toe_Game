@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Player 點擊判斷
   const clickedBox = (elem) => {
-    // 若不是玩家回合，則不執行
-    if (!isPlayerTurn) return;
+    // 若不是玩家回合，則不執行 and 避免bot已選格子遭到玩家覆蓋
+    if (!isPlayerTurn || elem.innerHTML != "") return;
     // 變更為 bot 回合
     isPlayerTurn = false;
 
