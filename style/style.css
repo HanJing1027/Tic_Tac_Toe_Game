@@ -227,6 +227,15 @@ body {
   width: 100%;
   justify-content: space-between;
 }
+.play-board .details .players.active span:first-child {
+  color: #7DA0CA;
+}
+.play-board .details .players.active span:nth-child(2) {
+  color: #FFF;
+}
+.play-board .details .players.active .slider {
+  left: 50%;
+}
 .play-board .details .players .slider {
   position: absolute;
   top: 0;
@@ -236,6 +245,7 @@ body {
   background-color: #7DA0CA;
   border-radius: 5px;
   z-index: 2;
+  transition: all 0.3s ease;
 }
 .play-board .details .players span {
   position: relative;
@@ -248,6 +258,7 @@ body {
   font-size: 1.25rem;
   font-weight: 500;
   z-index: 5;
+  transition: all 0.3s ease;
 }
 .play-board .details .players span:first-child {
   color: #FFF;

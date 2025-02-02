@@ -95,6 +95,18 @@ body {
       width          : 100%;
       justify-content: space-between;
 
+      &.active span:first-child {
+        color: #7DA0CA;
+      }
+
+      &.active span:nth-child(2) {
+        color: #FFF;
+      }
+
+      &.active .slider {
+        left: 50%;
+      }
+
       .slider {
         position        : absolute;
         top             : 0;
@@ -104,6 +116,7 @@ body {
         background-color: #7DA0CA;
         border-radius   : 5px;
         z-index         : 2;
+        transition      : all .3s ease;
       }
 
       span {
@@ -117,6 +130,7 @@ body {
         font-size    : 1.25rem;
         font-weight  : 500;
         z-index      : 5;
+        transition   : all .3s ease;
 
         &:first-child {
           color: #FFF;
