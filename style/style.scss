@@ -69,6 +69,58 @@ body {
   }
 }
 
+.difficulty-box {
+  @include position;
+  opacity       : 0;
+  pointer-events: none;
+  transition    : all .3s ease;
+  transform     : translate(-50%, -50%) scale(.9);
+
+  max-width       : 380px;
+  width           : 100%;
+  padding         : 20px 25px 25px;
+  background-color: #FFF;
+  border-radius   : 8px;
+  box-shadow      : 0 0 5px 1px #00000016;
+
+  &.show {
+    opacity       : 1;
+    pointer-events: auto;
+    transform     : translate(-50%, -50%) scale(1);
+  }
+
+  h1 {
+    font-size  : 1.5rem;
+    font-weight: 500;
+    text-align : center;
+  }
+
+  .buttons {
+    display        : flex;
+    justify-content: center;
+    gap            : 20px;
+    width          : 100%;
+    margin-top     : 20px;
+
+    button {
+      cursor          : pointer;
+      width           : 100%;
+      font-size       : 1.25rem;
+      font-weight     : 500;
+      color           : #FFF;
+      border          : none;
+      padding         : 10px 20px;
+      background-color: #7DA0CA;
+      border-radius   : 8px;
+      transition      : all .15s ease-in-out;
+
+      &:hover {
+        transform: scale(.95);
+      }
+    }
+  }
+}
+
 .play-board {
   opacity       : 0;
   pointer-events: none;
