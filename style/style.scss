@@ -23,6 +23,7 @@ body {
   box-shadow      : 0 0 5px 1px #00000016;
   padding         : 20px 25px 25px;
   border-radius   : 8px;
+  z-index         : 10;
   transition      : all .3s ease;
 
   &.hidden {
@@ -162,7 +163,9 @@ body {
 }
 
 .result-box {
-  display: none;
+  opacity       : 0;
+  pointer-events: none;
+  transform     : scale(.9);
 
   max-width: 350px;
   width    : 100%;
@@ -172,6 +175,13 @@ body {
   border-radius   : 5px;
   box-shadow      : 0 0 5px 1px #00000016;
   transition      : all .3s ease;
+
+  &.show {
+    opacity       : 1;
+    pointer-events: auto;
+    transform     : scale(1);
+    transform     : translate(-50%, -50%);
+  }
 
   .won-text {
     text-align : center;

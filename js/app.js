@@ -6,6 +6,10 @@ const playBoard = document.querySelector(".play-board");
 const players = document.querySelector(".players");
 const allBox = document.querySelectorAll(".play-area section span");
 
+const resultBox = document.querySelector(".result-box");
+const wonText = document.querySelector(".won-text span");
+const closeBtn = document.querySelector(".result-box button");
+
 document.addEventListener("DOMContentLoaded", () => {
   // X & O
   let playerXIcon = "fa-solid fa-xmark";
@@ -75,26 +79,51 @@ document.addEventListener("DOMContentLoaded", () => {
       [0, 4, 8],
       [2, 4, 6],
     ];
-  };
 
-  // 判斷每一種勝利條件
-  for (let condition of winCondition) {
-    // 解構出3個索引
-    const [a, b, c] = condition;
-    // 取得對應的棋盤內容
-    const values = [
-      allBox[a].innerHTML,
-      allBox[b].innerHTML,
-      allBox[c].innerHTML,
-    ];
-    // 檢查是否三個格子都有相同的值(O or X)
-    // 若某一條線上的所有格子都被同一玩家填滿，則該玩家獲勝
-    if (values[0] && values[0] == values[1] && values[0] == values[2]) {
-      setTimeout(() => {
-        // 勝利結果
-      }, 500);
+    // 判斷每一種勝利條件
+    for (let condition of winCondition) {
+      // 解構出3個索引
+      const [a, b, c] = condition;
+      // 取得對應的棋盤內容
+      const values = [
+        allBox[a].innerHTML,
+        allBox[b].innerHTML,
+        allBox[c].innerHTML,
+      ];
+      // 檢查是否三個格子都有相同的值(O or X)
+      // 若某一條線上的所有格子都被同一玩家填滿，則該玩家獲勝
+      if (values[0] && values[0] == values[1] && values[0] == values[2]) {
+        setTimeout(() => {
+          // 顯示遊戲結果
+          resultBox.classList.add("show");
+          wonText.innerHTML = values[0];
+
+          // 關閉遊戲結果並重新開始遊戲
+          closeBtn.addEventListener("click", () => {
+            resultBox.classList.remove("show");
+            playBoard.classList.remove("show");
+
+            allBox.forEach((box) => {
+              // 清空上一場遊戲內容
+              box.innerHTML = "";
+              // 重新啟用點擊
+              box.style.pointerEvents = "auto";
+              // 再次執行player點擊判斷
+              box.addEventListener("click", () => clickedBox(box));
+            });
+
+            // 顯示選擇畫面
+            selectBox.classList.remove("hidden");
+
+            // 重置回合狀態
+            isPlayerTure = true;
+            players.classList.remove("active", "player");
+          });
+        }, 500);
+        return true;
+      }
     }
-  }
+  };
 
   // 對每個遊戲格子 新增一個 點擊事件
   allBox.forEach((box) => box.addEventListener("click", () => clickedBox(box)));

@@ -160,6 +160,7 @@ body {
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
   padding: 20px 25px 25px;
   border-radius: 8px;
+  z-index: 10;
   transition: all 0.3s ease;
 }
 .select-box.hidden {
@@ -283,7 +284,9 @@ body {
 }
 
 .result-box {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
   max-width: 350px;
   width: 100%;
   position: absolute;
@@ -295,6 +298,12 @@ body {
   border-radius: 5px;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.0862745098);
   transition: all 0.3s ease;
+}
+.result-box.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+  transform: translate(-50%, -50%);
 }
 .result-box .won-text {
   text-align: center;
