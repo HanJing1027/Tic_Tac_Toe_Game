@@ -15,14 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
   let playerXIcon = "fa-solid fa-xmark";
   let playerOIcon = "fa-solid fa-o";
   // 追蹤是否為玩家回合
-  let isPlayerTure = true;
+  let isPlayerTurn = true;
 
   // Player 點擊判斷
   const clickedBox = (elem) => {
     // 若不是玩家回合，則不執行
-    if (!isPlayerTure) return;
+    if (!isPlayerTurn) return;
     // 變更為 bot 回合
-    isPlayerTure = false;
+    isPlayerTurn = false;
 
     if (players.classList.contains("player")) {
       elem.innerHTML = `<i class="${playerOIcon}"></i>`;
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     checkWinner();
 
     // 還原為玩家回合
-    isPlayerTure = true;
+    isPlayerTurn = true;
   };
 
   // 勝利判斷
@@ -97,32 +97,49 @@ document.addEventListener("DOMContentLoaded", () => {
           // 顯示遊戲結果
           resultBox.classList.add("show");
           wonText.innerHTML = values[0];
-
-          // 關閉遊戲結果並重新開始遊戲
-          closeBtn.addEventListener("click", () => {
-            resultBox.classList.remove("show");
-            playBoard.classList.remove("show");
-
-            allBox.forEach((box) => {
-              // 清空上一場遊戲內容
-              box.innerHTML = "";
-              // 重新啟用點擊
-              box.style.pointerEvents = "auto";
-              // 再次執行player點擊判斷
-              box.addEventListener("click", () => clickedBox(box));
-            });
-
-            // 顯示選擇畫面
-            selectBox.classList.remove("hidden");
-
-            // 重置回合狀態
-            isPlayerTure = true;
-            players.classList.remove("active", "player");
-          });
+          resetGame();
         }, 500);
         return true;
       }
     }
+    // 平局(無人勝利)
+    // 檢查是否為平局 回傳 false or ture
+    let isDraw = [...allBox].every((box) => box.innerHTML != "");
+    if (isDraw) {
+      setTimeout(() => {
+        resultBox.classList.add("show");
+        wonText.innerHTML = `Draw!`;
+        resetGame();
+      }, 500);
+      return true;
+    }
+    return false;
+  };
+
+  const resetGame = () => {
+    // 關閉遊戲結果並重新開始遊戲
+    closeBtn.addEventListener(
+      "click",
+      () => {
+        resultBox.classList.remove("show");
+        playBoard.classList.remove("show");
+
+        allBox.forEach((box) => {
+          // 清空上一場遊戲內容
+          box.innerHTML = "";
+          // 重新啟用點擊
+          box.style.pointerEvents = "auto";
+        });
+
+        // 顯示選擇畫面
+        selectBox.classList.remove("hidden");
+
+        // 重置回合狀態
+        isPlayerTurn = true;
+        players.classList.remove("active", "player");
+      },
+      { once: true }
+    );
   };
 
   // 對每個遊戲格子 新增一個 點擊事件
