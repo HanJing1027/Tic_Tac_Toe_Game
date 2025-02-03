@@ -67,6 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Hard Bot 點擊判斷
   const hardBot = () => {
+    // 確保是 bot 的回合
+    if (isPlayerTurn) return;
+
+    // 檢查遊戲是否已經結束
+    if (checkWinner()) return;
+
     // 若玩家是 O，則 bot 選擇 X，反之亦然 = 取得bot當前使用的符號
     let botSymbol = players.classList.contains("player")
       ? playerXIcon
@@ -103,11 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 切換回玩家顯示
     players.classList.toggle("active");
 
-    // 檢查是否獲勝
-    checkWinner();
-
-    // 還原為玩家回合
-    isPlayerTurn = true;
+    // 檢查勝利後再切換回玩家回合
+    if (!checkWinner()) {
+      isPlayerTurn = true;
+    }
   };
 
   // 找出最佳移動（獲勝或阻止玩家獲勝）
@@ -142,6 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Easy Bot 點擊判斷
   const bot = () => {
+    // 確保是 bot 的回合
+    if (isPlayerTurn) return;
+
+    // 檢查遊戲是否已經結束
+    if (checkWinner()) return;
+
     // 塞選出box當中innerHTML為空的元素並做出選擇
     let availableBoxes = [...allBox].filter((box) => box.innerHTML == "");
     let randomBox =
@@ -159,11 +170,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // 切換回玩家顯示
     players.classList.toggle("active");
 
-    // 檢查是否獲勝
-    checkWinner();
-
-    // 還原為玩家回合
-    isPlayerTurn = true;
+    // 檢查勝利後再切換回玩家回合
+    if (!checkWinner()) {
+      isPlayerTurn = true;
+    }
   };
 
   // 勝利判斷
@@ -186,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
           resultBox.classList.add("show");
           wonText.innerHTML = values[0];
         }, 500);
+        isPlayerTurn = false;
         return true;
       }
     }
@@ -197,6 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         resultBox.classList.add("show");
         wonText.innerHTML = `Draw!`;
       }, 500);
+      isPlayerTurn = false; // 遊戲結束時鎖定回合
       return true;
     }
     return false;
@@ -210,12 +222,15 @@ document.addEventListener("DOMContentLoaded", () => {
     allBox.forEach((box) => {
       // 清空上一場遊戲內容
       box.innerHTML = "";
-      // 重新啟用點擊
-      box.style.pointerEvents = "auto";
+      // 先全部鎖定禁止按下按鈕 避免多次遊玩時勿觸
+      box.style.pointerEvents = "none";
     });
 
     // 顯示選擇畫面
     selectBox.classList.remove("hidden");
+
+    // 難度重置
+    isHard = undefined;
 
     // 重置回合狀態
     isPlayerTurn = true;
@@ -227,6 +242,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 玩家選擇 X 或 O
   selectXBtn.addEventListener("click", () => {
+    // 確保是玩家回合
+    isPlayerTurn = true;
     selectBox.classList.add("hidden");
     setTimeout(() => {
       difficultyBox.classList.add("show"); // 顯示難度選擇框
@@ -234,6 +251,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   selectOBtn.addEventListener("click", () => {
+    // 確保是玩家的回合
+    isPlayerTurn = true;
     selectBox.classList.add("hidden");
     setTimeout(() => {
       difficultyBox.classList.add("show"); // 顯示難度選擇框
@@ -245,6 +264,11 @@ document.addEventListener("DOMContentLoaded", () => {
   easyBtn.addEventListener("click", () => {
     isHard = false;
 
+    allBox.forEach((box) => {
+      // 重新啟用點擊
+      box.style.pointerEvents = "auto";
+    });
+
     difficultyBox.classList.remove("show"); // 隱藏難度框
     setTimeout(() => {
       playBoard.classList.add("show"); // 顯示遊戲板
@@ -254,6 +278,11 @@ document.addEventListener("DOMContentLoaded", () => {
   hardBtn.addEventListener("click", () => {
     isHard = true;
 
+    allBox.forEach((box) => {
+      // 重新啟用點擊
+      box.style.pointerEvents = "auto";
+    });
+
     difficultyBox.classList.remove("show"); // 隱藏難度框
     setTimeout(() => {
       playBoard.classList.add("show"); // 顯示遊戲板
@@ -262,4 +291,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 關閉result畫面
   closeBtn.addEventListener("click", resetGame);
+
+  // debug
+  const debugGameState = () => {
+    console.log({
+      isPlayerTurn,
+      isHard,
+      playerState: players.classList.contains("player"),
+      activeState: players.classList.contains("active"),
+      availableBoxes: [...allBox].filter((box) => box.innerHTML === "").length,
+    });
+  };
 });
