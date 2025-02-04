@@ -11,6 +11,7 @@ const players = document.querySelector(".players");
 const allBox = document.querySelectorAll(".play-area section span");
 
 const resultBox = document.querySelector(".result-box");
+const resultText = document.querySelector(".won-text");
 const wonText = document.querySelector(".won-text span");
 const closeBtn = document.querySelector(".result-box button");
 
@@ -206,7 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isDraw) {
       setTimeout(() => {
         resultBox.classList.add("show");
-        wonText.innerHTML = `Draw!`;
+        resultText.innerHTML = "Draw!";
+        resultText.style.color = "#7DA0CA";
       }, 500);
       isPlayerTurn = false; // 遊戲結束時鎖定回合
       return true;
