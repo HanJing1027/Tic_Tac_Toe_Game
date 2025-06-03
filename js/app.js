@@ -178,6 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // 勝利判斷
+  // 勝利判斷
   const checkWinner = () => {
     // 判斷每一種勝利條件
     for (let condition of winCondition) {
@@ -189,18 +190,29 @@ document.addEventListener("DOMContentLoaded", () => {
         allBox[b].innerHTML,
         allBox[c].innerHTML,
       ];
-      // 檢查是否三個格子都有相同的值(O or X)
-      // 若某一條線上的所有格子都被同一玩家填滿，則該玩家獲勝
-      if (values[0] && values[0] == values[1] && values[0] == values[2]) {
-        setTimeout(() => {
-          // 顯示遊戲結果
-          resultBox.classList.add("show");
-          wonText.innerHTML = values[0];
-        }, 500);
-        isPlayerTurn = false;
-        return true;
+
+      // 檢查是否三個格子都有內容且都是相同符號
+      if (values[0] && values[1] && values[2]) {
+        // 檢查是否都包含相同的 icon class
+        const hasXmark = (html) => html.includes("fa-xmark");
+        const hasO = (html) => html.includes("fa-o");
+
+        // 檢查三個位置是否都是 X 或都是 O
+        if (
+          (hasXmark(values[0]) && hasXmark(values[1]) && hasXmark(values[2])) ||
+          (hasO(values[0]) && hasO(values[1]) && hasO(values[2]))
+        ) {
+          setTimeout(() => {
+            // 顯示遊戲結果
+            resultBox.classList.add("show");
+            wonText.innerHTML = values[0];
+          }, 500);
+          isPlayerTurn = false;
+          return true;
+        }
       }
     }
+
     // 平局(無人勝利)
     // 檢查是否為平局 回傳 false or ture
     let isDraw = [...allBox].every((box) => box.innerHTML != "");
@@ -214,29 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return true;
     }
     return false;
-  };
-
-  const resetGame = () => {
-    // 關閉遊戲結果並重新開始遊戲
-    resultBox.classList.remove("show");
-    playBoard.classList.remove("show");
-
-    allBox.forEach((box) => {
-      // 清空上一場遊戲內容
-      box.innerHTML = "";
-      // 先全部鎖定禁止按下按鈕 避免多次遊玩時勿觸
-      box.style.pointerEvents = "none";
-    });
-
-    // 顯示選擇畫面
-    selectBox.classList.remove("hidden");
-
-    // 難度重置
-    isHard = undefined;
-
-    // 重置回合狀態
-    isPlayerTurn = true;
-    players.classList.remove("active", "player");
   };
 
   // 對每個遊戲格子 新增一個 點擊事件
