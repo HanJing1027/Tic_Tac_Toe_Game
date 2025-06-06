@@ -283,6 +283,39 @@ document.addEventListener("DOMContentLoaded", () => {
   // 關閉result畫面
   closeBtn.addEventListener("click", resetGame);
 
+  // 重置遊戲函數
+  const resetGame = () => {
+    // 隱藏結果框
+    resultBox.classList.remove("show");
+
+    // 清空所有格子
+    allBox.forEach((box) => {
+      box.innerHTML = "";
+      box.style.pointerEvents = "auto"; // 重新啟用點擊
+    });
+
+    // 重置玩家回合
+    isPlayerTurn = true;
+
+    // 重置玩家顯示狀態
+    players.classList.remove("active");
+
+    // 隱藏遊戲板
+    playBoard.classList.remove("show");
+
+    // 重置並顯示選擇框
+    selectBox.classList.remove("hidden");
+
+    // 隱藏難度選擇框
+    difficultyBox.classList.remove("show");
+
+    // 重置玩家選擇狀態
+    players.classList.remove("player");
+
+    // 重置結果文字顏色
+    resultText.style.color = "";
+  };
+
   // debug
   const debugGameState = () => {
     console.log({
