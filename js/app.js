@@ -280,9 +280,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 200);
   });
 
-  // 關閉result畫面
-  closeBtn.addEventListener("click", resetGame);
-
   // 重置遊戲函數
   const resetGame = () => {
     // 隱藏結果框
@@ -315,6 +312,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 重置結果文字顏色
     resultText.style.color = "";
   };
+
+  // 關閉result畫面
+  closeBtn.addEventListener("click", resetGame);
 
   // debug
   const debugGameState = () => {
